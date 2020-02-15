@@ -1,9 +1,9 @@
-package pl.tv.channellist
+package pl.tv.channellist.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.tv.channellist.R
 
 class MainActivity : AppCompatActivity() {
 
