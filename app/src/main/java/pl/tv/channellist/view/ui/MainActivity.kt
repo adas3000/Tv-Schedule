@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         DaggerTvComponent.builder().build().inject(this)
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory(application).create(ProgrammeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
         viewModel.repository = repository
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
 
 
         val observableTvProgramme =
@@ -85,7 +87,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,ProgrammeFragment())
+            .commit()
     }
 
 
