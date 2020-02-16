@@ -16,8 +16,15 @@ class TvModule {
 
 
     @Provides
+    @Named("channelList")
     fun provideChanelList():List<String>{
         return listOf("tvn","tvn-7","polsat","polsat-2","tvp-1","tvp-2")
+    }
+
+    @Provides
+    @Named("logoList")
+    fun provideLogoList():List<String>{
+        return listOf()
     }
 
     @Provides
