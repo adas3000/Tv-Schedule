@@ -21,21 +21,34 @@ class TvModule {
     }
 
     @Provides
-    @Named("time")
-    fun provideTvProgrammeDisplayTimeClass():String{
-        return "span.time-resizable"
+    @Named("nextTitleSelection")
+    fun provideDisplayTitleNextSelection():String{
+        return "table.tableOgladaj"
     }
 
     @Provides
-    @Named("title")
-    fun provideTvProgrammeDisplayTitleClass():String{
-        return "class.name-resizable"
+    @Named("lastTitleSelection")
+    fun provideDisplayTitleLastSelection():String{
+        return "a.name"
     }
 
     @Provides
-    @Named("category")
-    fun provideTvProgrammeDisplayCategoryClass():String{
-        return "span.resizable"
+    @Named("firstQuery")
+    fun provideFirstQuerySelection():String{
+        return "table"
     }
+
+    @Provides
+    @Named("lastTimeAndCategorySelection")
+    fun provideTimeAndCategoryQueryNextSelection():String{
+        return "span"
+    }
+
+
+
+
+
+
+
 
 }
