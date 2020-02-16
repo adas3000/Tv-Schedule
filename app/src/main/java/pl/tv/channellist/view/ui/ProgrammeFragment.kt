@@ -13,13 +13,14 @@ import kotlinx.android.synthetic.main.fragment_programmes.*
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.PendingProgramme
 import pl.tv.channellist.model.data.TvProgramme
-import pl.tv.channellist.view.adapter.MovieAdapter
 import pl.tv.channellist.view.adapter.ProgrammeAdapter
 import pl.tv.channellist.view.ui.util.IProgramme
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
 
 class ProgrammeFragment :Fragment(),IProgramme {
 
+
+    private lateinit var viewModel:ProgrammeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_programmes,container,false)
@@ -28,7 +29,7 @@ class ProgrammeFragment :Fragment(),IProgramme {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
 
         val adapter = ProgrammeAdapter(listOf(),this)
         recyclerView_programmes.adapter = adapter
@@ -36,18 +37,22 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
 
         viewModel.programmeLiveData.observe(this,Observer<List<TvProgramme>>{
-            for(i in it){
-                println(i.name)
-            }
             adapter.setProgrammeList(it)
         })
 
     }
 
 
-    override fun onProgrammeClick(programmeList: List<PendingProgramme>) {
-        recyclerView_programmes.adapter = MovieAdapter(programmeList)
-        recyclerView_programmes.layoutManager = LinearLayoutManager(context)
+    override fun onProgrammeClick(movieList: List<PendingProgramme>) {
+//        recyclerView_programmes.adapter = MovieAdapter(programmeList)
+//        recyclerView_programmes.layoutManager = LinearLayoutManager(context)
+
+        viewModel.setMovies(movieList)
+
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.fragment_container,MovieFragment())
+            .addToBackStack("")
+            .commit()
     }
 
 }

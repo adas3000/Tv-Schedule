@@ -10,6 +10,11 @@ import pl.tv.channellist.model.data.PendingProgramme
 
 class MovieAdapter(var movieList:List<PendingProgramme>):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
+    fun setMovies(movieList:List<PendingProgramme>){
+        this.movieList = movieList
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_item,parent,false))
     }
