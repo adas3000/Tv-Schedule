@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.TvProgramme
 
-class ProgrammeAdapter(val programeList: List<TvProgramme>):RecyclerView.Adapter<ProgrammeAdapter.ViewHolder>() {
+class ProgrammeAdapter(private var programeList: List<TvProgramme>):RecyclerView.Adapter<ProgrammeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.programme_item,parent,false))
@@ -18,6 +18,12 @@ class ProgrammeAdapter(val programeList: List<TvProgramme>):RecyclerView.Adapter
     override fun getItemCount(): Int {
         return programeList.size
     }
+
+    fun setProgrammeList(programeList: List<TvProgramme>){
+        this.programeList = programeList
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 

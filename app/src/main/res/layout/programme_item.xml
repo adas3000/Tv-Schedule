@@ -10,6 +10,9 @@
 
     <TextView
         android:id="@+id/textView_programme_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:padding="8dp"
+        android:textSize="25sp"
         android:text="name"
         android:layout_weight="0.75"
         android:layout_width="0dp"
