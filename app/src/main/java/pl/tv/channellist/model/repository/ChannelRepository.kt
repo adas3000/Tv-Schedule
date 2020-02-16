@@ -1,6 +1,8 @@
 package pl.tv.channellist.model.repository
 
-class ChannelRepository {
+import javax.inject.Inject
+
+class ChannelRepository @Inject constructor(val prefix: String, val channelList: List<String>) {
 
 
 

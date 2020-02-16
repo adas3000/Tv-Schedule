@@ -17,7 +17,7 @@ class ChannelsModule {
     fun provideChanelList():List<String>{
         return listOf("tvn","tvn-7","polsat","polsat-2","tvp-1","tvp-2")
     }
-    
+
 
 
 }
