@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.TvProgramme
 import pl.tv.channellist.view.ui.util.IProgramme
+
 
 class ProgrammeAdapter(private var programeList: List<TvProgramme>,val iProgramme: IProgramme):RecyclerView.Adapter<ProgrammeAdapter.ViewHolder>() {
 
@@ -28,11 +30,12 @@ class ProgrammeAdapter(private var programeList: List<TvProgramme>,val iProgramm
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.programmeName.text = programeList[position].name
+        holder.programmeName.text = programeList[position].name.capitalize()
 
         holder.programmeName.setOnClickListener {
             iProgramme.onProgrammeClick(programeList[position].movieList)
         }
+        Glide.with(holder.programmeLogo.context).load(programeList[position].logoUrl).into(holder.programmeLogo)
 
         //todo load logo
     }

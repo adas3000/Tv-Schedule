@@ -2,6 +2,7 @@ package pl.tv.channellist.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        val TAG = "MainActivity"
+    }
+
+
 
     private lateinit var viewModel: ProgrammeViewModel
     private val compositeDisposable = CompositeDisposable()
@@ -39,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         DaggerTvComponent.builder().build().inject(this)
 
         viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
-        viewModel.repository = repository
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
 
@@ -83,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onError(e: Throwable) {
-                Toast.makeText(this@MainActivity,e.message,Toast.LENGTH_SHORT).show()
+                Log.d(TAG,e.message.toString())
             }
         })
 

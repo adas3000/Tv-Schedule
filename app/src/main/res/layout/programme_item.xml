@@ -21,9 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView_programme_logo"
-        android:layout_weight="0.25"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         />
 
 
