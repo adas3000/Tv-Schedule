@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
 
             val selectedFragment: Fragment = when(it.itemId){
                 R.id.nav_live-> LiveFragment()
-                R.id.nav_channels->ChannelsFragment()
+                R.id.nav_channels->ProgrammeFragment()
                 R.id.nav_favors->FavorsFragment()
-                else -> {ChannelsFragment()}
+                else -> {ProgrammeFragment()}
             }
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container,selectedFragment)
                 .addToBackStack("")
