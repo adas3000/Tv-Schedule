@@ -5,13 +5,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.tv.channellist.R
-import pl.tv.channellist.model.repository.ChannelRepository
+import pl.tv.channellist.model.repository.ProgrammeRepository
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var channelRepo:ChannelRepository
+    lateinit var programmeRepo:ProgrammeRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

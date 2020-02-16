@@ -17,10 +17,7 @@ class TestTvWebScrapper {
 
         val result =tvWebScrapper.scrapFromUrl("https://www.cyfrowypolsat.pl/redir/program-tv/program-tv-pionowy-single-channel.cp?chN=","tvn")
 
-        for(i in result){
-            println(i.programmeName+","+i.programmeCategory+","+i.hour)
-        }
-
+        assertNotNull(result)
         assertTrue(result.isNotEmpty())
     }
 

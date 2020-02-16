@@ -29,25 +29,12 @@ class JsoupTest {
     fun ifNotEmptyThenOk() {
         assertNotNull(document)
         assertTrue(url == document.location())
-//
-//        println(document.body().selectFirst("table").select("span").text())
-//        println(document.body().selectFirst("table").select("table.tableOgladaj").select("a.name").text())
 
-
-        val _2_3 = document.body().selectFirst(tableQuery).select(displayTimeAndCategoryQuery)
-        val _1 = document.body().selectFirst(tableQuery).select(displayTitleClass)
+        val elements = document.body().selectFirst(tableQuery).select(displayTimeAndCategoryQuery)
+        val elements1 = document.body().selectFirst(tableQuery).select(displayTitleClass)
             .select(displaySecondTitleClass)
 
-        for(i in 0 until _2_3.size step 2){
-            println(_2_3[i].text()+","+_2_3[i+1].text())
-        }
-
-        for(i in _1){
-            println(i.text())
-        }
-
-
-        assertEquals(_2_3.size / 2, _1.size)
+        assertEquals(elements.size / 2, elements1.size)
     }
 
 
