@@ -6,20 +6,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import pl.tv.channellist.R
-import pl.tv.channellist.model.data.TvProgramme
+import pl.tv.channellist.model.data.PendingProgramme
 
-class MovieAdapter(var programmeList:List<TvProgramme>):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(var movieList:List<PendingProgramme>):RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_item,parent,false))
     }
 
     override fun getItemCount(): Int {
-        return programmeList.size
+        return movieList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.title.text = programmeList[position].movieList.
+        holder.title.text = movieList[position].programmeName
+        holder.category.text = movieList[position].programmeCategory
+        holder.time.text = movieList[position].hour
     }
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){

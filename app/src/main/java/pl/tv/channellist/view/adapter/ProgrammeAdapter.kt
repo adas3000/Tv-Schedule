@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.TvProgramme
+import pl.tv.channellist.view.ui.util.IProgramme
 
-class ProgrammeAdapter(private var programeList: List<TvProgramme>):RecyclerView.Adapter<ProgrammeAdapter.ViewHolder>() {
+class ProgrammeAdapter(private var programeList: List<TvProgramme>,val iProgramme: IProgramme):RecyclerView.Adapter<ProgrammeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.programme_item,parent,false))
@@ -28,6 +29,11 @@ class ProgrammeAdapter(private var programeList: List<TvProgramme>):RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.programmeName.text = programeList[position].name
+
+        holder.programmeName.setOnClickListener {
+            iProgramme.onProgrammeClick(programeList[position].movieList)
+        }
+
         //todo load logo
     }
 

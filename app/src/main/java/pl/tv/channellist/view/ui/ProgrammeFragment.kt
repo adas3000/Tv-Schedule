@@ -11,11 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_programmes.*
 import pl.tv.channellist.R
+import pl.tv.channellist.model.data.PendingProgramme
 import pl.tv.channellist.model.data.TvProgramme
+import pl.tv.channellist.view.adapter.MovieAdapter
 import pl.tv.channellist.view.adapter.ProgrammeAdapter
+import pl.tv.channellist.view.ui.util.IProgramme
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
 
-class ProgrammeFragment :Fragment() {
+class ProgrammeFragment :Fragment(),IProgramme {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,7 +30,7 @@ class ProgrammeFragment :Fragment() {
 
         val viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
 
-        val adapter = ProgrammeAdapter(listOf())
+        val adapter = ProgrammeAdapter(listOf(),this)
         recyclerView_programmes.adapter = adapter
         recyclerView_programmes.layoutManager = LinearLayoutManager(context)
 
@@ -39,9 +42,12 @@ class ProgrammeFragment :Fragment() {
             adapter.setProgrammeList(it)
         })
 
+    }
 
 
-
+    override fun onProgrammeClick(programmeList: List<PendingProgramme>) {
+        recyclerView_programmes.adapter = MovieAdapter(programmeList)
+        recyclerView_programmes.layoutManager = LinearLayoutManager(context)
     }
 
 }
