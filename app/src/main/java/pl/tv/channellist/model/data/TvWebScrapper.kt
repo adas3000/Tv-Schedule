@@ -43,7 +43,6 @@ class TvWebScrapper @Inject constructor(
             programmeList[i].programmeName = programmeTitles[i].text()
         }
 
-
         return programmeList
     }
 

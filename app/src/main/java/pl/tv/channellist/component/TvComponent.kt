@@ -8,5 +8,5 @@ import pl.tv.channellist.view.ui.ProgrammeFragment
 @Component(modules = [TvModule::class])
 interface TvComponent {
 
-    fun inject(fragment: ProgrammeFragment)
+    fun inject(mainActivity: MainActivity)
 }

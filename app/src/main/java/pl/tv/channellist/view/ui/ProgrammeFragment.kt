@@ -30,10 +30,7 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
 
     private lateinit var viewModel:ProgrammeViewModel
-    private val compositeDisposable = CompositeDisposable()
 
-    @Inject
-    lateinit var repository: ProgrammeRepository
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,52 +40,17 @@ class ProgrammeFragment :Fragment(),IProgramme {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val adapter = ProgrammeAdapter(listOf(),this)
+        viewModel =
+            ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
+
+        val adapter = ProgrammeAdapter(listOf(), this)
         recyclerView_programmes.adapter = adapter
         recyclerView_programmes.layoutManager = LinearLayoutManager(context)
 
 
-        viewModel.programmeLiveData.observe(this,Observer<List<TvProgramme>>{
+        viewModel.programmeLiveData.observe(this, Observer<List<TvProgramme>> {
             adapter.setProgrammeList(it)
         })
-
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
-
-        DaggerTvComponent.builder().build().inject(this)
-
-        val observableTvProgramme =
-            Observable.create(ObservableOnSubscribe<List<TvProgramme>> {
-                if(!it.isDisposed){
-                    it.onNext(repository.doFindProgrammes())
-                    it.onComplete()
-                }
-            })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-
-        observableTvProgramme.subscribe(object: io.reactivex.Observer<List<TvProgramme>> {
-            override fun onSubscribe(d: Disposable) {
-                compositeDisposable.add(d)
-            }
-
-            override fun onComplete() {
-
-            }
-
-            override fun onNext(t: List<TvProgramme>) {
-                viewModel.setProgrammes(t)
-            }
-
-            override fun onError(e: Throwable) {
-                Log.d(MainActivity.TAG,e.message.toString())
-            }
-        })
-
     }
 
 
@@ -102,9 +64,5 @@ class ProgrammeFragment :Fragment(),IProgramme {
             .commit()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        compositeDisposable.clear()
-    }
 
 }

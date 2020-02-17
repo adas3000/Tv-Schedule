@@ -66,6 +66,7 @@ class MovieFragment : Fragment() {
                     menu.getItem(menuItemId).setTitle(R.string.programme_top_nav_white_text)
                 }
                 else  {
+                    viewModel.currentProgrammeLiveData.value!!.isFavourite = false
                     menu.getItem(menuItemId).setIcon(R.drawable.ic_favorite_black)
                     menu.getItem(menuItemId).setTitle(R.string.programme_top_nav_black_text)
                 }

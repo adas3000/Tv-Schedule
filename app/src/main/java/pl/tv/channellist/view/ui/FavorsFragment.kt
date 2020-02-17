@@ -68,7 +68,9 @@ class FavorsFragment : Fragment(),IProgramme {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        compositeDisposable.clear()
+        if(compositeDisposable.isDisposed){
+            compositeDisposable.dispose()
+        }
     }
 
     override fun onProgrammeClick(clickedProgramme: TvProgramme) {
