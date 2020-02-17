@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import io.reactivex.Observable
@@ -51,9 +52,9 @@ class MainActivity : AppCompatActivity() {
                     ProgrammeFragment()
                 }
             }
+
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)
-                .addToBackStack("")
                 .commit()
 
             true
@@ -110,6 +111,20 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    override fun onBackPressed(){
+
+        val currentFragment :Fragment= supportFragmentManager.findFragmentById(R.id.fragment_container) as Fragment
+
+        if(currentFragment is FavorsFragment || currentFragment is LiveFragment){
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container,ProgrammeFragment())
+                .commit()
+            bottom_navigation_view.menu[0].isChecked = true
+        }
+        else super.onBackPressed()
     }
 
 

@@ -9,6 +9,18 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
+
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_12
+        targetCompatibility JavaVersion.VERSION_12
+    }
+
+    kotlinOptions{
+        jvmTarget = JavaVersion.VERSION_12.toString()
+    }
+
+
     defaultConfig {
         applicationId "pl.tv.channellist"
         minSdkVersion 22
