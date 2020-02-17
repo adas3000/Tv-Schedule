@@ -39,6 +39,8 @@ class ProgrammeFragment :Fragment(),IProgramme {
         viewModel.programmeLiveData.observe(this, Observer<List<TvProgramme>> {
             adapter.setProgrammeList(it)
         })
+
+
     }
 
 

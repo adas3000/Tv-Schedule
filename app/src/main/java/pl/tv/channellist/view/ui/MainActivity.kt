@@ -2,6 +2,7 @@ package pl.tv.channellist.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         DaggerTvComponent.builder().build().inject(this)
         viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
 
@@ -56,6 +58,18 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
+        swipe_refresh_layout.setOnRefreshListener {
+            if(supportFragmentManager.findFragmentById(R.id.fragment_container) is ProgrammeFragment) {
+                setData()
+                val handler = Handler()
+                handler.postDelayed({
+                    swipe_refresh_layout.isRefreshing = false
+                }, 1000)
+            }
+            else swipe_refresh_layout.isRefreshing = false
+        }
+
         if(savedInstanceState==null)
         setData()
     }

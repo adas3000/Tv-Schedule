@@ -13,6 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_live.*
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.LiveTvProgramme
@@ -67,6 +68,7 @@ class LiveFragment : Fragment(){
                 Log.d(MainActivity.TAG,e.message.toString())
             }
         })
+
 
 
     }
