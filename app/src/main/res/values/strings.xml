@@ -7,6 +7,7 @@
     <string name="movie_item_default_title">Programme</string>
     <string name="movie_item_default_category">Category</string>
     <string name="movie_item_default_time">00:00</string>
-    <string name="programme_top_nav_black_text">FavorBlack</string>
-    <string name="programme_top_nav_white_text">FavorWhite</string>
+    <string name="programme_top_nav_black_text">Not Favorite</string>
+    <string name="programme_top_nav_white_text">Favorite</string>
+    <string name="programme_top_nav_selected_programme">Programme</string>
 </resources>

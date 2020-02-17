@@ -1,12 +1,21 @@
 package pl.tv.channellist.view.ui
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.fragment_movies.*
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.TvProgramme
@@ -16,11 +25,13 @@ import pl.tv.channellist.viewmodel.ProgrammeViewModel
 class MovieFragment : Fragment() {
 
     companion object{
-        const val menuItemId = 0
+        const val menuItemFavorId = 1
+        const val menuItemIconId = 0
     }
 
     private lateinit var viewModel: ProgrammeViewModel
     private lateinit var menu:Menu
+    private lateinit var programmeIconUrl:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +54,7 @@ class MovieFragment : Fragment() {
 
         viewModel.currentProgrammeLiveData.observe(this, Observer<TvProgramme>{
             adapter.setMovies(it.movieList)
+            programmeIconUrl = it.logoUrl
         })
 
     }
@@ -50,10 +62,25 @@ class MovieFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.channels_top_menu,menu)
         if(viewModel.currentProgrammeLiveData.value!!.isFavourite){
-            menu.getItem(menuItemId).setIcon(R.drawable.ic_favorite_white)
-            menu.getItem(menuItemId).setTitle(R.string.programme_top_nav_white_text)
+            menu.getItem(menuItemFavorId).setIcon(R.drawable.ic_favorite_white)
+            menu.getItem(menuItemFavorId).setTitle(R.string.programme_top_nav_white_text)
         }
         this.menu = menu
+        loadImg(menu,programmeIconUrl)
+    }
+
+    private fun loadImg(menu:Menu,urlPath:String){
+        Glide.with(this)
+            .asBitmap()
+            .load(urlPath)
+            .into(object:CustomTarget<Bitmap>(){
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    menu[menuItemIconId].icon = BitmapDrawable(context?.resources,resource)
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,13 +89,13 @@ class MovieFragment : Fragment() {
             R.id.is_favor -> {
                 if(item.title.toString() == getString(R.string.programme_top_nav_black_text)){
                     viewModel.currentProgrammeLiveData.value!!.isFavourite = true
-                    menu.getItem(menuItemId).setIcon(R.drawable.ic_favorite_white)
-                    menu.getItem(menuItemId).setTitle(R.string.programme_top_nav_white_text)
+                    menu.getItem(menuItemFavorId).setIcon(R.drawable.ic_favorite_white)
+                    menu.getItem(menuItemFavorId).setTitle(R.string.programme_top_nav_white_text)
                 }
                 else  {
                     viewModel.currentProgrammeLiveData.value!!.isFavourite = false
-                    menu.getItem(menuItemId).setIcon(R.drawable.ic_favorite_black)
-                    menu.getItem(menuItemId).setTitle(R.string.programme_top_nav_black_text)
+                    menu.getItem(menuItemFavorId).setIcon(R.drawable.ic_favorite_black)
+                    menu.getItem(menuItemFavorId).setTitle(R.string.programme_top_nav_black_text)
                 }
                 true
             }

@@ -2,6 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/is_programme_icon"
+        android:icon="@drawable/ic_tv_black"
+        android:title="@string/programme_top_nav_selected_programme"
+        app:showAsAction="ifRoom"
+        />
+
+
+
     <item
         android:id="@+id/is_favor"
         android:icon="@drawable/ic_favorite_black"

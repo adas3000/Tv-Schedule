@@ -43,7 +43,6 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
     }
 
-
     override fun onProgrammeClick(clickedProgramme: TvProgramme) {
 
         viewModel.setCurrentProgramme(clickedProgramme)

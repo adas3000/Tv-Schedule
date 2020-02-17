@@ -1,12 +1,16 @@
 package pl.tv.channellist.view.ui
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Menu
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -73,7 +77,9 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState==null)
         setData()
+
     }
+
 
     private fun setData(){
         val observableTvProgramme =
