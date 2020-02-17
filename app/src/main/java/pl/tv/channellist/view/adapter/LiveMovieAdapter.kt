@@ -16,7 +16,7 @@ class LiveMovieAdapter(var liveMovieList: List<LiveTvProgramme>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fragment_live, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.live_movie_item, parent, false))
 
 
     override fun getItemCount(): Int = liveMovieList.size
@@ -29,12 +29,11 @@ class LiveMovieAdapter(var liveMovieList: List<LiveTvProgramme>) :
             .load(liveMovieList[position].logoUrl)
             .placeholder(R.drawable.ic_tv_black)
             .into(holder.logo)
-        
+
 
         holder.title.text = liveMovieList[position].liveMovie.programmeName
         holder.category.text = liveMovieList[position].liveMovie.programmeCategory
         holder.time.text = liveMovieList[position].liveMovie.hour + "-"+liveMovieList[position].endHour
-
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

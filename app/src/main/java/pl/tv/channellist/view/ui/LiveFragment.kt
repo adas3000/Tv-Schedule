@@ -1,6 +1,5 @@
 package pl.tv.channellist.view.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,10 +14,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_live.*
-import kotlinx.android.synthetic.main.fragment_movies.*
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.LiveTvProgramme
-import pl.tv.channellist.view.adapter.MovieAdapter
+import pl.tv.channellist.view.adapter.LiveMovieAdapter
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
 
 class LiveFragment : Fragment(){
@@ -41,14 +39,6 @@ class LiveFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val adapter = MovieAdapter(listOf())
-        recyclerView_movies.adapter = adapter
-        recyclerView_movies.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
         viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
 
         val programmeLiveObservable = Observable
@@ -61,7 +51,7 @@ class LiveFragment : Fragment(){
 
         programmeLiveObservable.subscribe(object:Observer<LiveTvProgramme>{
             override fun onComplete() {
-//                recyclerView_live.adapter = MovieAdapter()
+                recyclerView_live.adapter = LiveMovieAdapter(liveProgrammeList)
                 recyclerView_live.layoutManager = LinearLayoutManager(context)
             }
 
@@ -79,8 +69,9 @@ class LiveFragment : Fragment(){
         })
 
 
-
     }
+
+
 
 
 
