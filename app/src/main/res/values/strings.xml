@@ -3,4 +3,8 @@
     <string name="tv_channels_text">Channels</string>
     <string name="tv_live_text">Live</string>
     <string name="tv_favors_text">Favorites</string>
+    <string name="programme_item_default_title">Programme</string>
+    <string name="movie_item_default_title">Programme</string>
+    <string name="movie_item_default_category">Category</string>
+    <string name="movie_item_default_time">00:00</string>
 </resources>
