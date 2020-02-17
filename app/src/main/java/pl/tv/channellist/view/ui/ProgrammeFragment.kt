@@ -1,30 +1,18 @@
 package pl.tv.channellist.view.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_programmes.*
 import pl.tv.channellist.R
-import pl.tv.channellist.component.DaggerTvComponent
-import pl.tv.channellist.model.data.PendingProgramme
 import pl.tv.channellist.model.data.TvProgramme
-import pl.tv.channellist.model.repository.ProgrammeRepository
 import pl.tv.channellist.view.adapter.ProgrammeAdapter
 import pl.tv.channellist.view.ui.util.IProgramme
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
-import javax.inject.Inject
 
 class ProgrammeFragment :Fragment(),IProgramme {
 
