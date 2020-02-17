@@ -43,7 +43,6 @@ class ProgrammeFragment :Fragment(),IProgramme {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         val adapter = ProgrammeAdapter(listOf(),this)
         recyclerView_programmes.adapter = adapter
         recyclerView_programmes.layoutManager = LinearLayoutManager(context)
@@ -57,7 +56,6 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
 
         viewModel = ViewModelProviders.of(activity as FragmentActivity).get(ProgrammeViewModel::class.java)
 
@@ -102,6 +100,11 @@ class ProgrammeFragment :Fragment(),IProgramme {
             .replace(R.id.fragment_container,MovieFragment())
             .addToBackStack("")
             .commit()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        compositeDisposable.clear()
     }
 
 }
