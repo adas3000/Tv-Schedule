@@ -14,6 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_live.*
 import kotlinx.android.synthetic.main.fragment_movies.*
 import pl.tv.channellist.R
 import pl.tv.channellist.model.data.LiveTvProgramme
@@ -33,7 +34,7 @@ class LiveFragment : Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movies,container,false)
+        return inflater.inflate(R.layout.fragment_live,container,false)
     }
 
 
@@ -60,8 +61,8 @@ class LiveFragment : Fragment(){
 
         programmeLiveObservable.subscribe(object:Observer<LiveTvProgramme>{
             override fun onComplete() {
-//                recyclerView_movies.adapter = MovieAdapter(liveProgrammeList)
-//                recyclerView_movies.layoutManager = LinearLayoutManager(context)
+//                recyclerView_live.adapter = MovieAdapter()
+                recyclerView_live.layoutManager = LinearLayoutManager(context)
             }
 
             override fun onSubscribe(d: Disposable) {

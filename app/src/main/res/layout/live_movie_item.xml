@@ -20,7 +20,7 @@
 
 
         <TextView
-            android:id="@+id/textView_live_programme_name"
+            android:id="@+id/textView_live_movie_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:padding="8dp"
             android:hint="@string/programme_item_default_title"
@@ -30,20 +30,20 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/textView_live_programme_category"
+            android:id="@+id/textView_live_movie_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/movie_item_default_category"
-            android:layout_below="@id/textView_live_programme_name"
+            android:layout_below="@id/textView_live_movie_name"
             />
 
         <TextView
             android:id="@+id/textView_live_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView_live_programme_name"
+            android:layout_below="@id/textView_live_movie_name"
             android:hint="@string/movie_item_default_time"
-            android:layout_toStartOf="@id/textView_live_programme_category"
+            android:layout_toStartOf="@id/textView_live_movie_category"
             android:layout_alignParentEnd="true"
             />
 
