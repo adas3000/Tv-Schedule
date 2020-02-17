@@ -16,14 +16,14 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_movies.*
 import pl.tv.channellist.R
-import pl.tv.channellist.model.data.PendingProgramme
+import pl.tv.channellist.model.data.LiveTvProgramme
 import pl.tv.channellist.view.adapter.MovieAdapter
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
 
 class LiveFragment : Fragment(){
 
     private lateinit var viewModel: ProgrammeViewModel
-    private val liveProgrammeList:MutableList<PendingProgramme> = mutableListOf()
+    private val liveProgrammeList:MutableList<LiveTvProgramme> = mutableListOf()
 
     private val compositeDisposable:CompositeDisposable = CompositeDisposable()
 
@@ -53,22 +53,22 @@ class LiveFragment : Fragment(){
         val programmeLiveObservable = Observable
             .fromIterable(viewModel.programmeLiveData.value)
             .map {
-                it.movieList[0]
+                LiveTvProgramme(it.logoUrl,it.movieList[0],it.movieList[1].hour)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-        programmeLiveObservable.subscribe(object:Observer<PendingProgramme>{
+        programmeLiveObservable.subscribe(object:Observer<LiveTvProgramme>{
             override fun onComplete() {
-                recyclerView_movies.adapter = MovieAdapter(liveProgrammeList)
-                recyclerView_movies.layoutManager = LinearLayoutManager(context)
+//                recyclerView_movies.adapter = MovieAdapter(liveProgrammeList)
+//                recyclerView_movies.layoutManager = LinearLayoutManager(context)
             }
 
             override fun onSubscribe(d: Disposable) {
                 compositeDisposable.add(d)
             }
 
-            override fun onNext(t: PendingProgramme) {
+            override fun onNext(t: LiveTvProgramme) {
                 liveProgrammeList.add(t)
             }
 
