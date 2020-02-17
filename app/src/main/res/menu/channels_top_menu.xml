@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/is_favor"
+        android:icon="@drawable/ic_favorite_black"
+        android:title="@string/programme_top_nav_black_text"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

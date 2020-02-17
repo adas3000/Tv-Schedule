@@ -40,15 +40,15 @@ class ProgrammeAdapter(private var programeList: List<TvProgramme>,val iProgramm
         holder.programmeName.text = programeList[position].name.toUpperCase()
 
         holder.programmeName.setOnClickListener {
-            iProgramme.onProgrammeClick(programeList[position].movieList)
+            iProgramme.onProgrammeClick(programeList[position])
         }
 
 
     }
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val programmeName = view.findViewById<TextView>(R.id.textView_programme_name)
-        val programmeLogo = view.findViewById<ImageView>(R.id.imageView_programme_logo)
+        val programmeName:TextView = view.findViewById(R.id.textView_programme_name)
+        val programmeLogo:ImageView = view.findViewById(R.id.imageView_programme_logo)
     }
 
 

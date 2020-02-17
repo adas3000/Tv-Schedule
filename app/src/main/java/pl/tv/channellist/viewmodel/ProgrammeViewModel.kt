@@ -10,6 +10,7 @@ class ProgrammeViewModel : ViewModel() {
 
     var programmeLiveData:MutableLiveData<List<TvProgramme>> = MutableLiveData()
     var movieLiveData:MutableLiveData<List<PendingProgramme>> = MutableLiveData()
+    var currentProgrammeLiveData:MutableLiveData<TvProgramme> = MutableLiveData()
 
     fun setProgrammes(tvProgrammes:List<TvProgramme>){
         programmeLiveData.value = tvProgrammes
@@ -19,5 +20,8 @@ class ProgrammeViewModel : ViewModel() {
         movieLiveData.value = pendingProgramme
     }
 
+    fun setCurrentProgramme(programme: TvProgramme){
+        currentProgrammeLiveData.value = programme
+    }
 
 }

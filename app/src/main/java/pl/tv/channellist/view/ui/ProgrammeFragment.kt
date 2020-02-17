@@ -1,9 +1,7 @@
 package pl.tv.channellist.view.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -21,6 +19,8 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
 
     private lateinit var viewModel:ProgrammeViewModel
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_programmes,container,false)
@@ -43,11 +43,10 @@ class ProgrammeFragment :Fragment(),IProgramme {
     }
 
 
-    override fun onProgrammeClick(movieList: List<PendingProgramme>) {
-//        recyclerView_programmes.adapter = MovieAdapter(programmeList)
-//        recyclerView_programmes.layoutManager = LinearLayoutManager(context)
+    override fun onProgrammeClick(clickedProgramme: TvProgramme) {
 
-        viewModel.setMovies(movieList)
+        viewModel.setMovies(clickedProgramme.movieList)
+        viewModel.setCurrentProgramme(clickedProgramme)
 
         fragmentManager!!.beginTransaction()
             .replace(R.id.fragment_container,MovieFragment())
