@@ -41,26 +41,29 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
 
-            val selectedFragment: Fragment = when(it.itemId){
-                R.id.nav_live-> LiveFragment()
-                R.id.nav_channels->ProgrammeFragment()
-                R.id.nav_favors->FavorsFragment()
-                else -> {ProgrammeFragment()}
+            val selectedFragment: Fragment = when (it.itemId) {
+                R.id.nav_live -> LiveFragment()
+                R.id.nav_channels -> ProgrammeFragment()
+                R.id.nav_favors -> FavorsFragment()
+                else -> {
+                    ProgrammeFragment()
+                }
             }
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,selectedFragment)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
                 .addToBackStack("")
                 .commit()
 
             true
         }
-        setTvProgrammes()
+        if(savedInstanceState==null)
+        setData()
     }
 
-    private fun setTvProgrammes(){
-
+    private fun setData(){
         val observableTvProgramme =
             Observable.create(ObservableOnSubscribe<List<TvProgramme>> {
-                if(!it.isDisposed){
+                if (!it.isDisposed) {
                     it.onNext(repository.doFindProgrammes())
                     it.onComplete()
                 }
@@ -68,13 +71,14 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
 
-        observableTvProgramme.subscribe(object: io.reactivex.Observer<List<TvProgramme>> {
+        observableTvProgramme.subscribe(object : io.reactivex.Observer<List<TvProgramme>> {
             override fun onSubscribe(d: Disposable) {
                 compositeDisposable.add(d)
             }
 
             override fun onComplete() {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,ProgrammeFragment())
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, ProgrammeFragment())
                     .commit()
             }
 
@@ -83,10 +87,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onError(e: Throwable) {
-                Log.d(TAG,e.message.toString())
+                Log.d(TAG, e.message.toString())
             }
         })
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

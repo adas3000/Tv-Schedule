@@ -71,7 +71,12 @@ class LiveFragment : Fragment(){
 
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if(!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
+    }
 
 
 
