@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onError(e: Throwable) {
                 Log.d(TAG, e.message.toString())
+                setData()
             }
         })
     }

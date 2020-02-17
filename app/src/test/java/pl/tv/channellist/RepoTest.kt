@@ -9,7 +9,7 @@ class RepoTest {
 
 
     val programmeRepository = ProgrammeRepository("https://www.cyfrowypolsat.pl/redir/program-tv/program-tv-pionowy-single-channel.cp?chN=",
-        listOf("tvn","polsat"), listOf(), TvWebScrapper("table","span",
+        listOf("tvn","polsat","tvn-7","polsat-2"), listOf(), TvWebScrapper("table","span",
             "table.tableOgladaj","a.name"))
 
     @Test
