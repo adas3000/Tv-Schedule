@@ -10,4 +10,5 @@
     <string name="programme_top_nav_black_text">Not Favorite</string>
     <string name="programme_top_nav_white_text">Favorite</string>
     <string name="programme_top_nav_selected_programme">Programme</string>
+    <string name="is_favor_txt_file_name_text">data.txt</string>
 </resources>

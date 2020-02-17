@@ -37,5 +37,11 @@ class JsoupTest {
         assertEquals(elements.size / 2, elements1.size)
     }
 
+    @Test
+    fun booleanTest(){
+        assertEquals(false,"false".toBoolean())
+        assertEquals(false,"FALSE".toBoolean())
+        assertEquals(false,"FAlSe".toBoolean())
+    }
 
 }

@@ -1,17 +1,12 @@
 package pl.tv.channellist.view.ui
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Menu
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,6 +19,8 @@ import pl.tv.channellist.component.DaggerTvComponent
 import pl.tv.channellist.model.data.TvProgramme
 import pl.tv.channellist.model.repository.ProgrammeRepository
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import javax.inject.Inject
 
 
@@ -79,6 +76,9 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState==null)
         setData()
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, ProgrammeFragment())
+            .commit()
     }
 
 
@@ -99,9 +99,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onComplete() {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, ProgrammeFragment())
-                    .commit()
+
             }
 
             override fun onNext(t: List<TvProgramme>) {
@@ -134,6 +132,19 @@ class MainActivity : AppCompatActivity() {
         }
         else super.onBackPressed()
     }
+
+    private fun readFromFile():List<String>{
+
+        val inputStream = openFileInput(getString(R.string.is_favor_txt_file_name_text))
+
+        if(inputStream != null){
+            val inputStreamReader = InputStreamReader(inputStream)
+
+            return BufferedReader(inputStreamReader).readLines()
+        }
+        return emptyList()
+    }
+
 
 
 }

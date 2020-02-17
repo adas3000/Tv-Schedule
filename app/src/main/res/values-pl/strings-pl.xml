@@ -10,4 +10,5 @@
     <string name="programme_top_nav_black_text">Nie jest ulubiony</string>
     <string name="programme_top_nav_white_text">Ulubiony</string>
     <string name="programme_top_nav_selected_programme">Program</string>
+    <string name="is_favor_txt_file_name_text">data.txt</string>
 </resources>

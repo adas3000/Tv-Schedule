@@ -21,6 +21,7 @@ import pl.tv.channellist.R
 import pl.tv.channellist.model.data.TvProgramme
 import pl.tv.channellist.view.adapter.MovieAdapter
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
+import java.io.OutputStreamWriter
 
 class MovieFragment : Fragment() {
 
@@ -102,6 +103,12 @@ class MovieFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    private fun writeToFile(data:List<String>){
+        val outputStreamWriter = OutputStreamWriter(context!!.openFileOutput(getString(R.string.is_favor_txt_file_name_text), Context.MODE_PRIVATE))
+        data.forEach(outputStreamWriter::write)
+        outputStreamWriter.close()
     }
 
 }
