@@ -1,6 +1,5 @@
 package pl.tv.channellist.view.ui
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movies.*
 import pl.tv.channellist.R
-import pl.tv.channellist.model.data.PendingProgramme
 import pl.tv.channellist.model.data.TvProgramme
 import pl.tv.channellist.view.adapter.MovieAdapter
 import pl.tv.channellist.viewmodel.ProgrammeViewModel
