@@ -7,7 +7,7 @@ import javax.inject.Named
 
 class ProgrammeRepository @Inject constructor(@Named("prefixUrl")val prefix: String, @Named("channelList") val channelList: List<String>,
                                               @Named("logoList") val logoList:List<String>,
-                                              val tvWebScrapper: TvWebScrapper) {
+                                              private val tvWebScrapper: TvWebScrapper) {
 
 
 
@@ -15,10 +15,10 @@ class ProgrammeRepository @Inject constructor(@Named("prefixUrl")val prefix: Str
 
         val programmes = mutableListOf<TvProgramme>()
 
-
-        for(i in channelList){
-            programmes.add(TvProgramme(i,"",tvWebScrapper.scrapFromUrl(prefix,i)))
+        for(i in channelList.indices){
+            programmes.add(TvProgramme(channelList[i],logoList[i],tvWebScrapper.scrapFromUrl(prefix,channelList[i])))
         }
+
 
         return programmes
     }
