@@ -11,4 +11,6 @@
     <string name="programme_top_nav_white_text">Ulubiony</string>
     <string name="programme_top_nav_selected_programme">Program</string>
     <string name="is_favor_txt_file_name_text">data.txt</string>
+    <string name="load_activity_error_text">Wystąpił błąd podczas pobierania danych.</string>
+    <string name="load_activity_try_again_text">Spróbuj ponownie</string>
 </resources>

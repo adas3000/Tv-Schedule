@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this,R.id.fragment_container)
 
         DaggerTvComponent.builder().build().inject(this)
+
         viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
 
         NavigationUI.setupWithNavController(bottom_navigation_view,navController)
@@ -66,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 }, 1000)
         }
 
-        if(savedInstanceState==null) setData()
     }
 
 
