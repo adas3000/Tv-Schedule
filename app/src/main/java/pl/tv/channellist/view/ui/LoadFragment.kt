@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_main.*
 import pl.tv.channellist.R
 
 class LoadFragment : Fragment() {
@@ -13,7 +14,12 @@ class LoadFragment : Fragment() {
         return inflater.inflate(R.layout.load_fragment,container,false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        bottom_navigation_view.visibility = View.GONE
+
+    }
 
 
 }
