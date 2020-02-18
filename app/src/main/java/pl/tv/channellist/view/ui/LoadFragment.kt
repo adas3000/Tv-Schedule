@@ -41,7 +41,6 @@ class LoadFragment : Fragment() {
         DaggerTvComponent.builder().build().inject(this)
         navController = Navigation.findNavController(view)
         setData()
-        Toast.makeText(context,"IM IN LOADFRAGMENT", Toast.LENGTH_SHORT).show()
     }
 
     private fun setData(){

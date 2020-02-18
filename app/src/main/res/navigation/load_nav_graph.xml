@@ -10,6 +10,8 @@
         android:label="LoadErrorFragment" >
         <action
             android:id="@+id/action_loadErrorFragment_to_loadFragment"
+            app:popUpTo="@id/loadFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/loadFragment" />
     </fragment>
     <fragment
@@ -18,6 +20,8 @@
         android:label="LoadFragment" >
         <action
             android:id="@+id/action_loadFragment_to_loadErrorFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loadFragment"
             app:destination="@id/loadErrorFragment" />
     </fragment>
 </navigation>
