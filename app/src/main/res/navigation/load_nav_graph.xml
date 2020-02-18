@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/load_nav_graph"
+    app:startDestination="@id/loadErrorFragment">
+
+    <fragment
+        android:id="@+id/loadErrorFragment"
+        android:name="pl.tv.channellist.view.ui.LoadErrorFragment"
+        android:label="LoadErrorFragment" >
+        <action
+            android:id="@+id/action_loadErrorFragment_to_loadFragment"
+            app:destination="@id/loadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadFragment"
+        android:name="pl.tv.channellist.view.ui.LoadFragment"
+        android:label="LoadFragment" >
+        <action
+            android:id="@+id/action_loadFragment_to_loadErrorFragment"
+            app:destination="@id/loadErrorFragment" />
+    </fragment>
+</navigation>

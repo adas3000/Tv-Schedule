@@ -13,4 +13,5 @@
     <string name="is_favor_txt_file_name_text">data.txt</string>
     <string name="load_activity_error_text">Error occurred while fetching data</string>
     <string name="load_activity_try_again_text">Try again</string>
+    <string name="load_activity_no_internet_connection_text">No internet connection</string>
 </resources>

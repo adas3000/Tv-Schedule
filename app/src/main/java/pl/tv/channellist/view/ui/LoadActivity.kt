@@ -2,7 +2,6 @@ package pl.tv.channellist.view.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
@@ -10,7 +9,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_load.*
 import pl.tv.channellist.R
 import pl.tv.channellist.component.DaggerTvComponent
 import pl.tv.channellist.model.data.TvProgramme
@@ -33,6 +31,9 @@ class LoadActivity : AppCompatActivity() {
         setContentView(R.layout.activity_load)
 
         DaggerTvComponent.builder().build().inject(this)
+
+
+        if(savedInstanceState == null) setData()
     }
 
     private fun setData(){
@@ -61,7 +62,8 @@ class LoadActivity : AppCompatActivity() {
 
             override fun onError(e: Throwable) {
                 Log.d(TAG, e.message.toString())
-                setContentView(R.layout.activity_load_error)
+                setContentView(R.layout.fragment_load_error)
+
             }
         })
     }
