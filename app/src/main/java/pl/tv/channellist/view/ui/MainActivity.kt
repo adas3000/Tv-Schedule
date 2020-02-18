@@ -58,14 +58,11 @@ class MainActivity : AppCompatActivity() {
 
 
         swipe_refresh_layout.setOnRefreshListener {
-            if(supportFragmentManager.findFragmentById(R.id.fragment_container) is ProgrammeFragment) {
                 setData()
                 val handler = Handler()
                 handler.postDelayed({
                     swipe_refresh_layout.isRefreshing = false
                 }, 1000)
-            }
-            else swipe_refresh_layout.isRefreshing = false
         }
 
         if(savedInstanceState==null)
