@@ -31,19 +31,9 @@
     <fragment
         android:id="@+id/favors"
         android:name="pl.tv.channellist.view.ui.FavorsFragment"
-        android:label="FavorsFragment">
-
-
-    </fragment>
+        android:label="FavorsFragment"/>
     <fragment
         android:id="@+id/movieFragment"
         android:name="pl.tv.channellist.view.ui.MovieFragment"
-        android:label="MovieFragment">
-
-        <action
-            android:id="@+id/action_movie_to_favors"
-            app:destination="@id/favors"
-            />
-
-    </fragment>
+        android:label="MovieFragment"/>
 </navigation>
