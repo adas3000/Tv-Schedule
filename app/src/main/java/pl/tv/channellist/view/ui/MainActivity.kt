@@ -1,5 +1,7 @@
 package pl.tv.channellist.view.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -24,11 +26,11 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 
 
-@Suppress("UNCHECKED_CAST")
 class MainActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         const val TAG = "MainActivity"
+        const val sharedPreferencesName="data"
     }
 
     private lateinit var viewModel: ProgrammeViewModel
@@ -43,39 +45,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navController = Navigation.findNavController(this,R.id.fragment_container)
+        val navController = Navigation.findNavController(this, R.id.fragment_container)
 
         DaggerTvComponent.builder().build().inject(this)
 
         viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
 
-        NavigationUI.setupWithNavController(bottom_navigation_view,navController)
+        NavigationUI.setupWithNavController(bottom_navigation_view, navController)
 
         swipe_refresh_layout.setOnRefreshListener {
-                setData()
-                val handler = Handler()
-                handler.postDelayed({
-                    swipe_refresh_layout.isRefreshing = false
-                }, 1000)
+            setData()
+            Handler().postDelayed({
+                swipe_refresh_layout.isRefreshing = false
+            }, 1000)
         }
 
         val programmeList = intent.extras?.getParcelableArrayList<TvProgramme>("data")
-
-       viewModel.setProgrammes(programmeList as List<TvProgramme>)
-
+        viewModel.setProgrammes(programmeList as List<TvProgramme>)
+        viewModel.readIsFavorFromSharedPreferences(getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
+                as SharedPreferences)
     }
 
 
-    private fun setData(){
+    private fun setData() {
         val observableTvProgramme =
-            Observable.create(ObservableOnSubscribe<List<TvProgramme>> {
-                if (!it.isDisposed) {
-                    it.onNext(repository.doFindProgrammes())
-                    it.onComplete()
-                }
-            })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                Observable.create(ObservableOnSubscribe<List<TvProgramme>> {
+                    if (!it.isDisposed) {
+                        it.onNext(repository.doFindProgrammes())
+                        it.onComplete()
+                    }
+                })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
 
         observableTvProgramme.subscribe(object : io.reactivex.Observer<List<TvProgramme>> {
             override fun onSubscribe(d: Disposable) {
@@ -98,25 +99,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
+        viewModel.saveIsFavorValuesToSharedPreferences(getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
+                as SharedPreferences)
         compositeDisposable.clear()
     }
-
-
-    private fun readFromFile():List<String>{
-
-        val inputStream = openFileInput(getString(R.string.is_favor_txt_file_name_text))
-
-        if(inputStream != null){
-            val inputStreamReader = InputStreamReader(inputStream)
-
-            return BufferedReader(inputStreamReader).readLines()
-        }
-        return emptyList()
-    }
-
 
 
 }

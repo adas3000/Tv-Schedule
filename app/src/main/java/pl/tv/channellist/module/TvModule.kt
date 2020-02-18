@@ -40,8 +40,8 @@ class TvModule {
             "https://lh3.googleusercontent.com/RqHWT4Y0B3SyJAB3KD6wwoDSEoeRAS7vR4NgquqqKqsy95QcS7NwgrqXIVMB8mDBnz-b",
             "https://pbs.twimg.com/profile_images/1013722580182863872/iazLEZLR_400x400.jpg",
                 "https://www.cyfrowypolsat.pl/img/homepage/logo/big/program-tv-hbo.gif",
-                "http://www.cyfrowypolsat.pl/img/homepage/logo/big/hbo2.jpg",
-                "http://www.cyfrowypolsat.pl/img/homepage/logo/big/hbo-3.jpg")
+                "https://ocdn.eu/images/program-tv/Nzc7MDA_/16169c06f52570d620fc3dc6481e698c.png",
+                "https://cyfrowa.rp.pl/wp-content/uploads/2018/09/967ba90ac1_AR-302109927.jpg")
     }
 
     @Provides

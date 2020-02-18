@@ -110,10 +110,4 @@ class MovieFragment : Fragment() {
 
     }
 
-    private fun writeToFile(data:List<String>){
-        val outputStreamWriter = OutputStreamWriter(context!!.openFileOutput(getString(R.string.is_favor_txt_file_name_text), Context.MODE_PRIVATE))
-        data.forEach(outputStreamWriter::write)
-        outputStreamWriter.close()
-    }
-
 }
