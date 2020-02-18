@@ -1,5 +1,6 @@
 package pl.tv.channellist.view.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.*
 import pl.tv.channellist.R
 import pl.tv.channellist.component.DaggerTvComponent
 import pl.tv.channellist.model.data.TvProgramme
@@ -26,9 +28,8 @@ class LoadFragment : Fragment() {
     @Inject
     lateinit var repository: ProgrammeRepository
     private val compositeDisposable = CompositeDisposable()
-
-
     private lateinit var navController: NavController
+    private lateinit var programmeList:List<TvProgramme>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_load,container,false)
@@ -60,11 +61,12 @@ class LoadFragment : Fragment() {
             }
 
             override fun onComplete() {
-
+                activity?.finish()
+                startActivity(Intent(context,MainActivity::class.java))
             }
 
             override fun onNext(t: List<TvProgramme>) {
-
+                programmeList = t
             }
 
             override fun onError(e: Throwable) {
@@ -74,5 +76,9 @@ class LoadFragment : Fragment() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
 
 }
