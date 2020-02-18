@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_channels"
+        android:id="@+id/programme"
         android:icon="@drawable/ic_tv_black"
+        app:showAsAction="ifRoom"
         android:title="@string/tv_channels_text"/>
 
     <item
-        android:id="@+id/nav_live"
+        android:id="@+id/live"
         android:icon="@drawable/ic_live_tv"
+        app:showAsAction="ifRoom"
         android:title="@string/tv_live_text"/>
 
     <item
-        android:id="@+id/nav_favors"
+        android:id="@+id/favors"
         android:icon="@drawable/ic_favorite_black"
+        app:showAsAction="ifRoom"
         android:title="@string/tv_favors_text"/>
 
 

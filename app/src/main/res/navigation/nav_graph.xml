@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/programme">
+
+
+
+    <fragment
+        android:id="@+id/programme"
+        android:name="pl.tv.channellist.view.ui.ProgrammeFragment"
+        android:label="ProgrammeFragment">
+    <action
+        android:id="@+id/action_programme_to_live"
+        app:destination="@id/live"/>
+        <action
+            android:id="@+id/action_programme_to_movies"
+            app:destination="@id/movieFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/live"
+        android:name="pl.tv.channellist.view.ui.LiveFragment"
+        android:label="LiveFragment">
+
+        <action
+            android:id="@+id/action_live_to_favors"
+            app:destination="@id/favors"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favors"
+        android:name="pl.tv.channellist.view.ui.FavorsFragment"
+        android:label="FavorsFragment">
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="pl.tv.channellist.view.ui.MovieFragment"
+        android:label="MovieFragment">
+
+    </fragment>
+</navigation>

@@ -1,12 +1,20 @@
 package pl.tv.channellist.view.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,31 +44,18 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var repository: ProgrammeRepository
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val navController = Navigation.findNavController(this,R.id.fragment_container)
 
         DaggerTvComponent.builder().build().inject(this)
         viewModel = ViewModelProviders.of(this).get(ProgrammeViewModel::class.java)
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener {
+        NavigationUI.setupWithNavController(bottom_navigation_view,navController)
 
-            val selectedFragment: Fragment = when (it.itemId) {
-                R.id.nav_live -> LiveFragment()
-                R.id.nav_channels -> ProgrammeFragment()
-                R.id.nav_favors -> FavorsFragment()
-                else -> {
-                    ProgrammeFragment()
-                }
-            }
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, selectedFragment)
-                .commit()
-
-            true
-        }
 
         swipe_refresh_layout.setOnRefreshListener {
             if(supportFragmentManager.findFragmentById(R.id.fragment_container) is ProgrammeFragment) {
@@ -76,9 +71,6 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState==null)
         setData()
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, ProgrammeFragment())
-            .commit()
     }
 
 
@@ -114,24 +106,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
 
-    override fun onBackPressed(){
-
-        val currentFragment :Fragment= supportFragmentManager.findFragmentById(R.id.fragment_container) as Fragment
-
-        if(currentFragment is FavorsFragment || currentFragment is LiveFragment){
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container,ProgrammeFragment())
-                .commit()
-            bottom_navigation_view.menu[0].isChecked = true
-        }
-        else super.onBackPressed()
-    }
 
     private fun readFromFile():List<String>{
 

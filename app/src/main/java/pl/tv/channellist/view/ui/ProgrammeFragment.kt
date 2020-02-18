@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_programmes.*
 import pl.tv.channellist.R
@@ -18,7 +20,7 @@ class ProgrammeFragment :Fragment(),IProgramme {
 
 
     private lateinit var viewModel:ProgrammeViewModel
-
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,18 +42,18 @@ class ProgrammeFragment :Fragment(),IProgramme {
             adapter.setProgrammeList(it)
         })
 
-
     }
 
     override fun onProgrammeClick(clickedProgramme: TvProgramme) {
-
         viewModel.setCurrentProgramme(clickedProgramme)
-
-        fragmentManager!!.beginTransaction()
-            .replace(R.id.fragment_container,MovieFragment())
-            .addToBackStack("")
-            .commit()
+        navController.navigate(R.id.action_programme_to_movies)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
 
 
 }
