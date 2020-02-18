@@ -1,12 +1,18 @@
 package pl.tv.channellist.view.ui
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.getSystemService
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -62,16 +68,21 @@ class LoadFragment : Fragment() {
 
             override fun onComplete() {
                 activity?.finish()
-                startActivity(Intent(context,MainActivity::class.java))
+                val bundle = bundleOf("data" to programmeList)
+                startActivity(Intent(context,MainActivity::class.java).putExtras(bundle))
             }
 
             override fun onNext(t: List<TvProgramme>) {
                 programmeList = t
             }
 
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onError(e: Throwable) {
                 Log.d(LoadActivity.TAG, e.message.toString())
-                navController.navigate(R.id.action_loadFragment_to_loadErrorFragment)
+                if(isNetworkAvailable()) setData()
+                else navController.navigate(R.id.action_loadFragment_to_loadErrorFragment)
+
+                //todo do correct isnetworkavailable
             }
         })
     }
@@ -79,6 +90,17 @@ class LoadFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun isNetworkAvailable():Boolean{
+
+        val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI
+                or ConnectivityManager.TYPE_MOBILE)
+
+
+        return activeNetworkInfo?.isConnected == true
     }
 
 }

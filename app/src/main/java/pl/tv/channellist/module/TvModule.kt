@@ -19,7 +19,7 @@ class TvModule {
     @Named("channelList")
     fun provideChanelList():List<String>{
         return listOf("tvn","tvn-7","polsat","polsat-2","tvp-1","tvp-2","cartoon-network","discovery-channel",
-            "tv-4","tv-6","disney-xd","tvp-sport","eleven-sports-1-hd")
+            "tv-4","tv-6","disney-xd","tvp-sport","eleven-sports-1-hd","hbo","hbo2","hbo-3")
     }
 
     @Provides
@@ -38,7 +38,10 @@ class TvModule {
             "https://ocdn.eu/images/program-tv/ODM7MDA_/4d1b5527275ab44206ab4faa0e3e775b.png",
             "https://ocdn.eu/images/program-tv/ZDE7MDA_/4b0ebcc101ee8cb20824447bb42ec3e3.png",
             "https://lh3.googleusercontent.com/RqHWT4Y0B3SyJAB3KD6wwoDSEoeRAS7vR4NgquqqKqsy95QcS7NwgrqXIVMB8mDBnz-b",
-            "https://pbs.twimg.com/profile_images/1013722580182863872/iazLEZLR_400x400.jpg")
+            "https://pbs.twimg.com/profile_images/1013722580182863872/iazLEZLR_400x400.jpg",
+                "https://www.cyfrowypolsat.pl/img/homepage/logo/big/program-tv-hbo.gif",
+                "http://www.cyfrowypolsat.pl/img/homepage/logo/big/hbo2.jpg",
+                "http://www.cyfrowypolsat.pl/img/homepage/logo/big/hbo-3.jpg")
     }
 
     @Provides

@@ -1,22 +1,12 @@
 package pl.tv.channellist.view.ui
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,6 +24,7 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 
 
+@Suppress("UNCHECKED_CAST")
 class MainActivity : AppCompatActivity() {
 
     companion object{
@@ -43,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: ProgrammeViewModel
 
     private val compositeDisposable = CompositeDisposable()
+
     @Inject
     lateinit var repository: ProgrammeRepository
 
@@ -66,6 +58,10 @@ class MainActivity : AppCompatActivity() {
                     swipe_refresh_layout.isRefreshing = false
                 }, 1000)
         }
+
+        val programmeList = intent.extras?.getParcelableArrayList<TvProgramme>("data")
+
+       viewModel.setProgrammes(programmeList as List<TvProgramme>)
 
     }
 
