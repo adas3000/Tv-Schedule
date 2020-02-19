@@ -17,8 +17,13 @@ class ProgrammeViewModel : ViewModel() {
     }
 
 
-    fun setProgrammes(tvProgrammes:List<TvProgramme>){
+    private fun setProgrammes(tvProgrammes:List<TvProgramme>){
         programmeLiveData.value = tvProgrammes
+    }
+
+    fun setProgrammesAndRefreshFavors(tvProgrammes: List<TvProgramme>, sharedPreferences: SharedPreferences){
+        setProgrammes(tvProgrammes)
+        readIsFavorFromSharedPreferences(sharedPreferences)
     }
 
 
@@ -34,7 +39,7 @@ class ProgrammeViewModel : ViewModel() {
         editor.apply()
     }
 
-    fun readIsFavorFromSharedPreferences(sharedPreferences: SharedPreferences){
+    private fun readIsFavorFromSharedPreferences(sharedPreferences: SharedPreferences){
 
         programmeLiveData.value?.forEach{
             it.isFavourite = sharedPreferences.getBoolean(it.name,false)
