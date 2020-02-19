@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TV</string>
+    <string name="app_name">harmonogram TV</string>
     <string name="tv_channels_text">Programy</string>
     <string name="tv_live_text">Na żywo</string>
     <string name="tv_favors_text">Ulubione</string>
